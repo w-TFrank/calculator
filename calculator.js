@@ -21,7 +21,13 @@ function operate(operator, a, b) {
         return divide(a, b);
     }
 }
-console.log(operate(add, 2, 2));
-console.log(operate(subtract, 2, 2));
-console.log(operate(multiply, 2, 2));
-console.log(operate(divide, 2, 2));
+
+let buttons = document.querySelectorAll('button');
+const screen = document.querySelector('#screen');
+
+buttons.forEach(function (i) {
+    i.addEventListener('click', function () {
+        screen.textContent = ("1");
+        console.log("1");
+    });
+});
