@@ -27,7 +27,10 @@ const screen = document.querySelector('#screen');
 
 buttons.forEach(function (i) {
     i.addEventListener('click', function () {
-        screen.textContent = ("1");
-        console.log("1");
+        if (this.className === "number"){
+            screen.textContent = (this.id);
+        } else if (this.id === "AC") {
+            screen.textContent = ("");
+        }
     });
 });

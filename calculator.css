@@ -25,11 +25,18 @@ body {
     gap: 2px;
 }
 #screen {
+    display: flex;
     background: white;
+    box-sizing: border-box;
+    padding-right: 10px;
+    font-size: 22px;
     width: 238px;
     height: 50px;
     border: 1px solid black;
     border-radius: 5px;
+    justify-content: right;
+    align-items: center;
+    
 }
 button {
     height: 55px;
@@ -48,6 +55,6 @@ button {
 #equals {
     background: rgb(236, 128, 128);
 }
-#operator {
+.operator {
     background: rgb(131, 218, 131);
 }
