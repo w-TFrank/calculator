@@ -24,6 +24,12 @@ body {
     height: 57px;
     gap: 2px;
 }
+else if (this.id === "equals") {
+    screen.textContent = operate(operator, a, b);
+    a = screen.textContent;
+    c = null;
+    console.log(a,b,c);
+} 
 #screen {
     display: flex;
     background: white;
