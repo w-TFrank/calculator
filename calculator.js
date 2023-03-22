@@ -9,6 +9,15 @@ function operate(operator, a, b) {
         return a / b;
     }
 }
+/* 
+    -add some kind of css when user hovers/clicks button
+    -make equals sign function so math can still be done after it is pressed
+    -make font a bit larger on the buttons
+    -make long decimals round to 10 digits total
+    -decimal
+    -backspace
+    -comment the code
+*/
 let buttons = document.querySelectorAll('button');
 const screen = document.querySelector('#screen');
 let a = null;
@@ -48,12 +57,19 @@ buttons.forEach(function (i) {
             b = a;
             a = c;
             a = operate(operator, a, b);
-            screen.textContent = a;
-            console.log(a,b,c);
-            a = screen.textContent * 1;
+            if (a.toString().length > maxLength) {
+                if (a.toFixed(3).toString().length > maxLength) {
+                    screen.textContent = ("number too big!");
+                } else {
+                    screen.textContent = a.toFixed(3);
+                    a = screen.textContent * 1;
+                }
+            } else if (!(a.toString().length > maxLength)) {
+                screen.textContent = a;
+                a = screen.textContent * 1;
+            }
             b = null;
             operator = this.id;
         }
-        console.log(a,b,c);
     });
 });

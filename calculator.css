@@ -36,7 +36,6 @@ body {
     border-radius: 5px;
     justify-content: right;
     align-items: center;
-    
 }
 button {
     height: 55px;
@@ -45,14 +44,17 @@ button {
     border-radius: 5px;
     border: 1px solid black;
 }
+button:hover {
+    background-image: linear-gradient(rgb(0 0 0/20%) 0 0);
+}
 #zero0 {
     width: 178px;
 }
-#AC {
+.AC {
     background: rgb(247, 194, 96);
     width: 178px;
 }
-#equals {
+.equals {
     background: rgb(236, 128, 128);
 }
 .operator {
