@@ -10,8 +10,8 @@ function operate(operator, a, b) {
     }
 }
 /* 
-    -add some kind of css when user hovers/clicks button
-    -make equals sign function so math can still be done after it is pressed
+    -fix bug w/ operator sign being pressed while a, b, & c are null. it's acting somewhat
+    weird if you spam the operator buttons and the equals sign but i can't replicate it.
     -make font a bit larger on the buttons
     -make long decimals round to 10 digits total
     -decimal
@@ -32,13 +32,16 @@ buttons.forEach(function (i) {
             a = null;
             b = null;
             c = null;
+            console.log("hello1");
         } else if (this.className === "number" && a === null){
+            console.log("hello2");
             if (screen.textContent.length > maxLength){
                 this.textContent = this.textContent.substr(0, maxLength);
             } else {
                 screen.textContent += this.id.match(/\d+/);
             }
         } else if (this.className === "number" && !(a === null)){
+            console.log("hello3");
             screen.textContent = "";
             c = null;
             b = a;
@@ -49,9 +52,11 @@ buttons.forEach(function (i) {
                 screen.textContent += this.id.match(/\d+/);
             }
         } else if ((a === null) && (b === null) && (this.id === "add" || "subtract" || "multiply" || "divide")) {
+            console.log("hello4");
             operator = this.id;
             a = screen.textContent * 1;
-        } else if ((a === null) && !(b === null) && (this.id === "add" || "subtract" || "multiply" || "divide")) {
+        } else if (((a === null) && !(b === null))) {
+            console.log("hello5");
             a = screen.textContent * 1;
             c = b;
             b = a;
@@ -70,6 +75,15 @@ buttons.forEach(function (i) {
             }
             b = null;
             operator = this.id;
+        } else if (!(a === null) && (this.id === "add" || "subtract" || "multiply" || "divide")) {
+            console.log("hello6");
+            operator = this.id;
         }
+        console.log(a,b,c);
+        // if (this.id === "equals") {
+        //     screen.textContent = a;
+        //     c = null;
+        // } 
+        // console.log(a,b,c);
     });
 });
