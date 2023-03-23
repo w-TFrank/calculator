@@ -5,17 +5,12 @@ function operate(operator, a, b) {
         return a - b;
     } else if (operator === "multiply") {
         return a * b;
-    }else if (operator === "divide") {
+    } else if (operator === "divide") {
         return a / b;
     }
 }
 /* 
-    -fix bug w/ operator sign being pressed while a, b, & c are null. it's acting somewhat
-    weird if you spam the operator buttons and the equals sign but i can't replicate it.
     -make font a bit larger on the buttons
-    -make long decimals round to 10 digits total
-    -decimal
-    -backspace
     -comment the code
 */
 let buttons = document.querySelectorAll('button');
@@ -40,7 +35,7 @@ buttons.forEach(function (i) {
             } else {
                 screen.textContent += this.id.match(/\d+/);
             }
-        } else if (this.className === "number" && !(a === null)){
+        } else if (this.className === "number" && !(a === null) && b === null){
             console.log("hello3");
             screen.textContent = "";
             c = null;
@@ -51,39 +46,51 @@ buttons.forEach(function (i) {
             } else {
                 screen.textContent += this.id.match(/\d+/);
             }
-        } else if ((a === null) && (b === null) && (this.id === "add" || "subtract" || "multiply" || "divide")) {
-            console.log("hello4");
-            operator = this.id;
-            a = screen.textContent * 1;
+        } else if ((a === null) && (b === null)) {
+            if (this.id === "add" ||
+                this.id === "subtract" || 
+                this.id === "multiply" ||
+                this.id === "divide") {
+                console.log("hello4");
+                operator = this.id;
+                a = screen.textContent * 1;
+            } else if (screen.textContent === "") {
+                console.log("he");
+                a = null;
+                b = null;
+                c = null;
+            }
         } else if (((a === null) && !(b === null))) {
-            console.log("hello5");
-            a = screen.textContent * 1;
-            c = b;
-            b = a;
-            a = c;
-            a = operate(operator, a, b);
-            if (a.toString().length > maxLength) {
-                if (a.toFixed(3).toString().length > maxLength) {
-                    screen.textContent = ("number too big!");
-                } else {
-                    screen.textContent = a.toFixed(3);
+            if (operator === "add" ||
+                operator === "subtract" || 
+                operator === "multiply" ||
+                operator === "divide") {    
+                console.log("hello5");
+                a = screen.textContent * 1;
+                c = b;
+                b = a;
+                a = c;
+                a = operate(operator, a, b);
+                console.log(operator);
+                if (a.toString().length > maxLength) {
+                    if (a.toFixed(3).toString().length > maxLength) {
+                        screen.textContent = ("number too big!");
+                    } else {
+                        screen.textContent = a.toFixed(3);
+                        a = screen.textContent * 1;
+                    }
+                } else if (!(a.toString().length > maxLength)) {
+                    screen.textContent = a;
                     a = screen.textContent * 1;
                 }
-            } else if (!(a.toString().length > maxLength)) {
-                screen.textContent = a;
-                a = screen.textContent * 1;
-            }
-            b = null;
-            operator = this.id;
+                b = null;
+                operator = this.id;
+            } 
         } else if (!(a === null) && (this.id === "add" || "subtract" || "multiply" || "divide")) {
             console.log("hello6");
             operator = this.id;
         }
         console.log(a,b,c);
-        // if (this.id === "equals") {
-        //     screen.textContent = a;
-        //     c = null;
-        // } 
-        // console.log(a,b,c);
+        console.log(operator);
     });
 });
